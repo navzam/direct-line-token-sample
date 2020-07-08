@@ -105,7 +105,7 @@ Note that we do *not* specify a user ID when initiating WebChat. Direct Line wil
 1. Update the messaging endpoint in your Bot Channels Registration to the ngrok URL. For example: `https://abcdef.ngrok.io/api/messages`
 
 ### Run the API
-1. Navigate to the `api` directory.
+1. Navigate to the `api/javascript` directory.
 1. Fill in the environment variables in the `.env` file, according to the following table:
     | Variable | Description | Example value |
     | -------- | ----------- | ------------- |
