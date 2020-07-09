@@ -22,6 +22,8 @@ namespace TokenApi.Controllers
         }
 
         // Endpoint for generating a Direct Line token bound to a random user ID
+        // For simplicity, uses a CORS policy that allows requests from all origins
+        // You should restrict this to specific domains
         [HttpPost]
         [Route("/api/direct-line-token")]
         [EnableCors("AllowAllPolicy")]
