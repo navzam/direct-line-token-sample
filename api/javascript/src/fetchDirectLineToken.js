@@ -1,5 +1,7 @@
 const fetch = require('node-fetch');
 
+// Calls Direct Line API to generate a Direct Line token
+// Provides user ID in the request body to bind the user ID to the token
 module.exports = async function fetchDirectLineTokenAsync(secret, userId) {
     const response = await fetch('https://directline.botframework.com/v3/directline/tokens/generate', {
         headers: {

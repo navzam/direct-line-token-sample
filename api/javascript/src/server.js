@@ -16,8 +16,8 @@ app.use(express.json());
 
 // Endpoint for generating a Direct Line token bound to a random user ID
 app.post('/api/direct-line-token', async (req, res) => {
-    // Set CORS header to allow requests from all origins, for simplicity
-    // You should restrict this to specific domains 
+    // Set CORS header. For simplicity, allow requests from all origins
+    // You should restrict this to specific domains
     res.header('Access-Control-Allow-Origin', '*');
 
     // Generate a random user ID to use for DirectLine token
