@@ -89,11 +89,15 @@ const response = await fetch('https://directline.botframework.com/v3/directline/
 <details><summary>C#</summary>
 
 ```csharp
-// DirectLineTokenController.cs
+// DirectLineTokenService.cs
+
+httpClient.BaseAddress = new Uri("https://directline.botframework.com/");
+
+...
 
 var fetchTokenRequestBody = new { user = new { id = userId } };
 
-var fetchTokenRequest = new HttpRequestMessage(HttpMethod.Post, "https://directline.botframework.com/v3/directline/tokens/generate")
+var fetchTokenRequest = new HttpRequestMessage(HttpMethod.Post, "v3/directline/tokens/generate")
 {
     Headers =
     {
@@ -102,8 +106,7 @@ var fetchTokenRequest = new HttpRequestMessage(HttpMethod.Post, "https://directl
     Content = new StringContent(JsonSerializer.Serialize(fetchTokenRequestBody), Encoding.UTF8, "application/json"),
 };
 
-var client = _httpClientFactory.CreateClient();
-var fetchTokenResponse = await client.SendAsync(fetchTokenRequest, cancellationToken);
+var fetchTokenResponse = await _httpClient.SendAsync(fetchTokenRequest, cancellationToken);
 ```
 
 </details>
