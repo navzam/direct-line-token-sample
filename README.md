@@ -105,14 +105,10 @@ Note that we do *not* specify a user ID when initiating WebChat. Direct Line wil
 1. Update the messaging endpoint in your Bot Channels Registration to the ngrok URL. For example: `https://abcdef.ngrok.io/api/messages`
 
 ### Run the API
-1. Navigate to the `api/javascript` directory.
-1. Fill in the environment variables in the `.env` file, according to the following table:
-    | Variable | Description | Example value |
-    | -------- | ----------- | ------------- |
-    | `PORT` | The port on which the API server will run. | 3000 |
-    | `DIRECT_LINE_SECRET` | The Direct Line secret issued by Bot Framework. Can be found in the Azure Bot Channels Registration resource after enabling the Direct Line channel. |  |
-1. Run `npm install` to install the required dependencies.
-1. Run `npm start` to start the server.
+
+The sample API is available in multiple languages. See the corresponding folders for READMEs on running the API.
+- [JavaScript API](./api/javascript/)
+- [C# API](./api/csharp/)
 
 ### Run the UI
 1. Navigate to the `ui` directory.
