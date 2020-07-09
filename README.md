@@ -33,6 +33,8 @@ Depending on the scenario, the backend API could be called from a client (such a
 
 In this sample, the user is anonymous, so the API randomly generates a user ID:
 
+<details><summary>JavaScript</summary>
+
 ```js
 // server.js
 
@@ -42,11 +44,32 @@ async function generateRandomUserId() {
 }
 ```
 
+</details>
+
+<details><summary>C#</summary>
+
+```csharp
+// DirectLineTokenController.cs
+
+private static string GenerateRandomUserId()
+{
+    byte[] tokenData = new byte[16];
+    using var rng = new RNGCryptoServiceProvider();
+    rng.GetBytes(tokenData);
+
+    return $"dl_{BitConverter.ToString(tokenData).Replace("-", "").ToLower()}";
+}
+```
+
+</details>
+
 The user ID is prefixed with "dl_" as required by the [Direct Line token API](https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-direct-line-3-0-authentication?view=azure-bot-service-4.0#generate-token).
 
 ### Retrieving a user-specific Direct Line token
 
 The API calls the Direct Line API to retrieve a Direct Line token. Notice that we pass the user ID in the body of the request:
+
+<details><summary>JavaScript</summary>
 
 ```js
 // fetchDirectLineToken.js
@@ -60,6 +83,30 @@ const response = await fetch('https://directline.botframework.com/v3/directline/
     body: JSON.stringify({ user: { id: userId } })
 });
 ```
+
+</details>
+
+<details><summary>C#</summary>
+
+```csharp
+// DirectLineTokenController.cs
+
+var fetchTokenRequestBody = new { user = new { id = userId } };
+
+var fetchTokenRequest = new HttpRequestMessage(HttpMethod.Post, "https://directline.botframework.com/v3/directline/tokens/generate")
+{
+    Headers =
+    {
+        { "Authorization", $"Bearer {directLineSecret}" },
+    },
+    Content = new StringContent(JsonSerializer.Serialize(fetchTokenRequestBody), Encoding.UTF8, "application/json"),
+};
+
+var client = _httpClientFactory.CreateClient();
+var fetchTokenResponse = await client.SendAsync(fetchTokenRequest, cancellationToken);
+```
+
+</details>
 
 The resulting Direct Line token will be bound to the passed user ID.
 
