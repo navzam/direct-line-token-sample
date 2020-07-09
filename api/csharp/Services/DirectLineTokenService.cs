@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Mime;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -35,7 +36,7 @@ namespace TokenApi.Services
                 {
                     { "Authorization", $"Bearer {directLineSecret}" },
                 },
-                Content = new StringContent(JsonSerializer.Serialize(fetchTokenRequestBody), Encoding.UTF8, "application/json"),
+                Content = new StringContent(JsonSerializer.Serialize(fetchTokenRequestBody), Encoding.UTF8, MediaTypeNames.Application.Json),
             };
 
             var fetchTokenResponse = await _httpClient.SendAsync(fetchTokenRequest, cancellationToken);

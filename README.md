@@ -103,7 +103,7 @@ var fetchTokenRequest = new HttpRequestMessage(HttpMethod.Post, "v3/directline/t
     {
         { "Authorization", $"Bearer {directLineSecret}" },
     },
-    Content = new StringContent(JsonSerializer.Serialize(fetchTokenRequestBody), Encoding.UTF8, "application/json"),
+    Content = new StringContent(JsonSerializer.Serialize(fetchTokenRequestBody), Encoding.UTF8, MediaTypeNames.Application.Json),
 };
 
 var fetchTokenResponse = await _httpClient.SendAsync(fetchTokenRequest, cancellationToken);
