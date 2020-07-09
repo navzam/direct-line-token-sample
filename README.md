@@ -153,9 +153,37 @@ Note that we do *not* specify a user ID when initiating WebChat. Direct Line wil
 
 ### Run the API
 
-The sample API is available in multiple languages. See the corresponding folders for READMEs on running the API.
-- [JavaScript API](./api/javascript/)
-- [C# API](./api/csharp/)
+The sample API is available in multiple languages. Choose one and expand the corresponding section for specific steps.
+
+<details><summary>JavaScript API</summary>
+
+1. Navigate to the `api/javascript` directory.
+1. Fill in the environment variables in the `.env` file. See the table below for descriptions.
+1. Run `npm install` to install the required dependencies.
+1. Run `npm start` to start the server.
+
+| Variable | Description | Example value |
+| -------- | ----------- | ------------- |
+| `PORT` | The port on which the API server will run. | 3000 |
+| `DIRECT_LINE_SECRET` | The Direct Line secret issued by Bot Framework. Can be found in the Azure Bot Channels Registration resource after enabling the Direct Line channel. |  |
+
+</details>
+
+<details><summary>C# API</summary>
+
+1. Add the required secrets to the .NET Core secret manager. See the table below for descriptions.
+    ```bash
+    cd ./api/csharp
+    dotnet user-secrets set "DirectLine:DirectLineSecret" "YOUR-DIRECT-LINE-SECRET-HERE"
+    ```
+1. (optional) Change the port specified in `./Properties/launchSettings.json`.
+1. Run `dotnet run` to start the server. (Alternatively, open and run the project in Visual Studio.)
+
+| Variable | Description | Example value |
+| -------- | ----------- | ------------- |
+| `DirectLine:DirectLineSecret` | The Direct Line secret issued by Bot Framework. Can be found in the Azure Bot Channels Registration resource after enabling the Direct Line channel. |  |
+
+</details>
 
 ### Run the UI
 1. Navigate to the `ui` directory.
