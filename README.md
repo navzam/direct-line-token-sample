@@ -120,12 +120,12 @@ The UI calls the API and uses the resulting Direct Line token to render WebChat:
 ```js
 // index.html
 
-const res = await fetch('http://localhost:3001/api/direct-line-token', { method: 'POST' });
+const res = await fetch('http://localhost:3000/api/direct-line-token', { method: 'POST' });
 const { token } = await res.json();
 
 window.WebChat.renderWebChat(
     {
-        directLine: window.WebChat.createDirectLine({ token }),
+    directLine: window.WebChat.createDirectLine({ token }),
     },
     document.getElementById('webchat')
 );
