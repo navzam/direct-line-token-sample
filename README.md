@@ -6,17 +6,17 @@ This sample demonstrates how to implement WebChat in a way that does not expose 
 
 ### Hiding the WebChat secret
 
-When embedding WebChat into a site, you must provide either your Direct Line secret or a Direct Line token so that WebChat can communicate with bot. The Direct Line secret can be used to access all of the bot's conversations, and it doesn't expire. A Direct Line token can only be used to access a single conversation, and it does expire. See the [Direct Line Authentication documentation](https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-direct-line-3-0-authentication?view=azure-bot-service-4.0) for more information.
+When embedding WebChat into a site, you must provide either your Direct Line secret or a Direct Line token so that WebChat can communicate with the bot. The Direct Line secret can be used to access all of the bot's conversations, and it doesn't expire. A Direct Line token can only be used to access a single conversation, and it does expire. See the [Direct Line Authentication documentation](https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-direct-line-3-0-authentication?view=azure-bot-service-4.0) for more information.
 
 Therefore, embedding WebChat using the Direct Line secret directly is strongly discouraged because it would expose your secret on the client-side. Instead, the recommended approach is to exchange the secret for a Direct Line token on the server-side. This sample shows how to obtain and use the token.
 
 ### Avoiding user impersonation
 
-WebChat allows you to specify a user ID on the client-side, which will be sent in activities to the bot. However, this is susceptible to user impersonation because a malicious user could modify their user ID. Since the user ID typically isn't verified, this is a security risk if the bot stores sensitive data keyed on the user ID. For example, the built-in [user authentication support Azure Bot Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-authentication?view=azure-bot-service-4.0) associates access tokens with user IDs.
+WebChat allows you to specify a user ID on the client-side, which will be sent in activities to the bot. However, this is susceptible to user impersonation because a malicious user could modify their user ID. Since the user ID typically isn't verified, this is a security risk if the bot stores sensitive data keyed on the user ID. For example, the built-in [user authentication support in Azure Bot Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-authentication?view=azure-bot-service-4.0) associates access tokens with user IDs.
 
-To avoid impersonation, the recommended approach is to bind a user ID to the Direct Line token. Then, any conversation using that token will send the bound user ID to the bot. This sample generates a random user ID on the server-side and binds it to the Direct Line token.
+To avoid impersonation, the recommended approach is for the server to bind a user ID to the Direct Line token. Then any conversation using that token will send the bound user ID to the bot. However, if the client is going to provide the user ID to the server, it is important for the server to validate the ID somehow (see below). Otherwise, a malicious user could still modify the user ID being sent by the client.
 
-While this mitigates impersonation concerns, the downside is that users will have a different user ID every time they talk to the bot. If you need a consistent and verified user ID, see the [Direct Line user token sample](https://github.com/navzam/user-direct-line-token-sample).
+To keep things simple, this sample generates a random user ID on the server-side and binds it to the Direct Line token. While this mitigates impersonation concerns, the downside is that users will have a different ID every time they talk to the bot. If you need a consistent and validated user ID, see the [Direct Line user token sample](https://github.com/navzam/user-direct-line-token-sample).
 
 ## Architecture
 
