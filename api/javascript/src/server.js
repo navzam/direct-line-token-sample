@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const crypto = require('crypto');
 const { promisify } = require('util');
 
@@ -14,12 +15,12 @@ const directLineSecret = enforceEnvironmentVariable('DIRECT_LINE_SECRET');
 const app = express();
 app.use(express.json());
 
+// Set CORS header. For simplicity, allow requests from all origins
+// You should restrict this to specific domains
+app.use(cors());
+
 // Endpoint for generating a Direct Line token bound to a random user ID
 app.post('/api/direct-line-token', async (req, res) => {
-    // Set CORS header. For simplicity, allow requests from all origins
-    // You should restrict this to specific domains
-    res.header('Access-Control-Allow-Origin', '*');
-
     // Generate a random user ID to use for DirectLine token
     const randomUserId = await generateRandomUserId();
 
