@@ -190,4 +190,10 @@ The sample API is available in multiple languages. Choose one and expand the cor
 
 ### Run the UI
 1. Navigate to the `ui` directory.
-1. Open `index.html` in a browser. (Alternatively, you can serve `index.html` on `localhost` using a web server, or use a local development server such as the [Live Server Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).)
+1. Serve `index.html` on `localhost:5500` using a web server.
+    - A quick way to get started is using the [http-server](https://www.npmjs.com/package/http-server) npm package. You can use `npx` to run it without installation:
+        ```bash
+        npx http-server ./ -p 5500
+        ```
+    - Another option is a local development server such as the [Live Server Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
+1. Open `http://localhost:5500` in a browser.
