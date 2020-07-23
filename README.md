@@ -1,4 +1,4 @@
-# Direct Line Token Sample
+# Direct Line token sample
 
 This sample demonstrates how to implement WebChat in a way that does not expose your Direct Line secret to the browser.
 
